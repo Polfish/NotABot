@@ -1,5 +1,3 @@
-const bot = require('../bot');
-
 module.exports = {
     name: "ping",
     description: "Pings the bot!",

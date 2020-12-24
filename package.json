@@ -1,9 +1,9 @@
 {
-    "name": "not-a-bot",
+    "name": "not_a_bot",
     "version": "1.0.0",
     "description": "Not a bot",
     "main": "bot.js",
-    "author": "No one",
+    "author": "Paul Chon",
     "dependencies": {
         "discord.js": "^12.5.1",
         "winston": "^3.3.3"
