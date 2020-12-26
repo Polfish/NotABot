@@ -1,2 +1,5 @@
+
+[//]: # (UPDATE)
+
 # NotABot
 Discord Bot
