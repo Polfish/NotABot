@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = {a
     name: "ping",
     description: "Pings the bot!",
     execute(message, args, prefix) {

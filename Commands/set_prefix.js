@@ -1,6 +1,6 @@
 const fsp = require('fs').promises;
 
-module.exports = {
+module.exports = {a
     name: "setprefix",
     description: "Sets the prefix for the bot.",
     async execute(message, args) {
