@@ -46,26 +46,27 @@ logger.info('Complete!');
 
 // Executing commands
 client.on('message', (message) => {
+    // Use readFile (asynchronous) instead?
     const prefix = JSON.parse(fs.readFileSync('auth.json')).prefix;
-
+    
     // If a message does not start with the prefix or the author of the message was the bot, then don't execute any commands and
     // just return
     if (!message.content.startsWith(prefix) || message.author.bot) {
         return;
     }
 
-    // Turning everything past the prefix into an array
+    // Turning the message into an array
     const args = message.content.slice(prefix.length).trim().split(/ +/);
 
     // Take the first entry after the prefix, which should be the command
     const command = args.shift().toLowerCase();
 
     if (!client.commands.has(command)) {
-        return message.channel.send('Command not found!');
+        return message.reply('Command not found!');
     }
 
     try {
-        client.commands.get(command).execute(message, args, prefix);
+        client.commands.get(command).execute(message, args, prefix, client);
     } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');

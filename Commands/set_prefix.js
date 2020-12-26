@@ -5,24 +5,24 @@ module.exports = {
     description: "Sets the prefix for the bot.",
     async execute(message, args) {
         try {
-            if (args[1] === undefined) {
-                return message.channel.send('No arguments!')
+            // If no arguments are given then don't continue
+            if (args[0] === undefined) {
+                return message.reply('No arguments!');
             }
             
             let data = await fsp.readFile('auth.json');
             let auth = JSON.parse(data);
 
-            message.channel.send(`Old prefix is: ${auth.prefix}`);
-            // set whatever property or properties in the object that you are trying to change
+            // Changing the prefix
+            await message.channel.send(`Old prefix is: ${auth.prefix}`);
             auth.prefix = args[0];
-            message.channel.send(`New prefix is: ${auth.prefix}`);
+            await message.channel.send(`New prefix is: ${auth.prefix}`);
 
             await fsp.writeFile('auth.json', JSON.stringify(auth));
         } catch (e) {
-            // error handling here
             console.log(e);
             message.channel.send('Error sending message!');
-            throw e;      // make sure caller can see the message
+            throw e;
         }
     }
 };
