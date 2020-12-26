@@ -1,0 +1,11 @@
+    if (message.content === 'bee') {
+        message.channel.send(`According to all known laws of aviation, there is no way a bee should be able to fly.
+            Its wings are too small to get its fat little body off the ground.
+            The bee, of course, flies anyway because bees don\'t care what humans think is impossible.`);
+    } else if (message.content === 'I am your father!') {
+        message.channel.send('NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+    } else if (message.content === 'Shut up') {
+        message.channel.send('No U');
+    } else if (message.content.toLowerCase().includes('fr') && message.author.id !== bot.user.id) {
+        message.channel.send('FR');
+    }
