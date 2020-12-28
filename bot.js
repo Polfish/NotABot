@@ -62,7 +62,7 @@ client.on('message', (message) => {
     const command = args.shift().toLowerCase();
 
     if (!client.commands.has(command)) {
-        return message.reply('Command not found!');
+        return message.reply(`Command not found! Try \`${prefix}help\` to find the right command.`);
     }
 
     try {

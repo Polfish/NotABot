@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Not a bot",
     "main": "bot.js",
-    "author": "Paul Chon",
+    "author": "Polfish",
     "dependencies": {
         "discord.js": "^12.5.1",
         "winston": "^3.3.3"
