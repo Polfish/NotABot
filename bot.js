@@ -67,18 +67,20 @@ client.on('message', (message) => {
         return message.reply(`Command not found! Try \`${prefix}help\` to find the right command.`);
     }
 
-    const guildName = client.guilds.cache.filter(guild => message.guild.id === guild.id).map(guild => guild.name);
-    // Creates a new database for each new server
-    mongoPass = mongoPass.replace('<dbname>', guildName);
+    if (client.commands.get(command).usesDB === 'true') {
+        const guildName = client.guilds.cache.filter(guild => message.guild.id === guild.id).map(guild => guild.name);
+        // Creates a new database for each new server
+        mongoPass = mongoPass.replace('<dbname>', guildName);
 
-    logger.info(`Logging into MongoDB dbname: ${guildName}`);
+        logger.info(`Logging into MongoDB dbname: ${guildName}`);
 
-    mongoose.connect(mongoPass, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+        mongoose.connect(mongoPass, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
 
-    logger.info('Complete!');
+        logger.info('Complete!');
+    }
 
     try {
         client.commands.get(command).execute(message, args, prefix, client);

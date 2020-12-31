@@ -4,6 +4,7 @@ const User = require('../schema/user');
 module.exports = {
     name: "userinfo",
     description: "Displays information for a user.",
+    usesDB: "true",
     async execute(message, args, prefix, client) {
         // Try finding the user first before checking the database
         const fetchedUser = !args[0] ? await client.users.fetch(message.author.id) : await client.users.fetch(args[0]);
@@ -46,7 +47,7 @@ module.exports = {
                 { name: 'Type', value: `${user.type}`, inline: false },
                 { name: 'Created At', value: fetchedUser.createdAt, inline: false },
                 { name: 'Joined At', value: guildMember.joinedAt, inline: false },
-                { name: 'Roles', value: roles, inline: false }
+                { name: 'Roles', value: roles, inline: false },
             );
 
         return message.channel.send(embed);

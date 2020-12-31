@@ -3,10 +3,10 @@ const Discord = require('discord.js');
 module.exports = {
     name: "users",
     description: "Lists all users of the server.",
+    usesDB: "false",
     async execute(message, args, prefix, client) {
-        // For some reason some users don't get cached and don't come out in the list. A fix was to use this line and put in the user id of the 
-        // users that weren't cached:
-        // await client.users.fetch('<userID>');
+        // This command will get all members including the ones that were not cached
+        await message.guild.members.fetch();
 
         const users = client.users.cache.map(user => user.username);
 
