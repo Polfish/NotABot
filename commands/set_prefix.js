@@ -5,8 +5,7 @@ module.exports = {
     description: "Sets the prefix for the bot.",
     async execute(message, args) {
         try {
-            // If no arguments are given then don't continue
-            if (args[0] === undefined) {
+            if (!args[0]) {
                 return message.reply('No arguments!');
             }
             

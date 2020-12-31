@@ -15,7 +15,7 @@ module.exports = {
             // Could also do: ` \`\`\`\n${cmdlist}\`\`\` `
             embed.addField(`Do \`${prefix}help <command>\` to know more about the command!`, "```" + cmdlist + "```");
 
-            message.channel.send(embed);
+            return message.channel.send(embed);
         } else {
             if (!client.commands.has(args[0])) {
                 return message.reply(`Command not found! Try \`${prefix}help\` to find the right command.`);
@@ -28,7 +28,7 @@ module.exports = {
             .setDescription(command.description)
             .addField('Usage', `${prefix}${command.name}`);
 
-            message.channel.send(embed);
+            return message.channel.send(embed);
         }
     }
 };

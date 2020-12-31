@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const logger = require('winston');
 const fs = require('fs');
 const { token } = require('./auth.json');
+let { mongoPass } = require('./auth.json');
+const mongoose = require('mongoose');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -48,7 +50,7 @@ logger.info('Complete!');
 client.on('message', (message) => {
     // Use readFile (asynchronous) instead?
     const prefix = JSON.parse(fs.readFileSync('auth.json')).prefix;
-    
+
     // If a message does not start with the prefix or the author of the message was the bot, then don't execute any commands and
     // just return
     if (!message.content.startsWith(prefix) || message.author.bot) {
@@ -64,6 +66,19 @@ client.on('message', (message) => {
     if (!client.commands.has(command)) {
         return message.reply(`Command not found! Try \`${prefix}help\` to find the right command.`);
     }
+
+    const guildName = client.guilds.cache.filter(guild => message.guild.id === guild.id).map(guild => guild.name);
+    // Creates a new database for each new server
+    mongoPass = mongoPass.replace('<dbname>', guildName);
+
+    logger.info(`Logging into MongoDB dbname: ${guildName}`);
+
+    mongoose.connect(mongoPass, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+
+    logger.info('Complete!');
 
     try {
         client.commands.get(command).execute(message, args, prefix, client);

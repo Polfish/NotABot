@@ -1,5 +1,6 @@
 {
-    "prefix": "!",
-    "token": "TOKEN_GOES_HERE"
+    "prefix" : "!",
+    "token" : "TOKEN_GOES_HERE",
+    "mongoPass" : "mongodb+srv://<MONGODB_USERNAME>:<PASSWORD@<BOT_USERNAME>.bytdq.mongodb.net/<dbname>?retryWrites=true&w=majority"
   }
   
