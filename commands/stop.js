@@ -4,7 +4,8 @@
 module.exports = {
     name: "stop",
     description: "Terminates the bot!",
-    usesDB: "false",
+    usage: "",
+    usesDB: false,
     execute(message, args, prefix, client) {
         client.destroy();
     }

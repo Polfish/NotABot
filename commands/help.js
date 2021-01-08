@@ -3,7 +3,8 @@ const Discord = require('discord.js');
 module.exports = {
     name: "help",
     description: "Displays a list of commands.",
-    usesDB: "false",
+    usage: "<prefix>help",
+    usesDB: false,
     execute(message, args, prefix, client) {
         if (!args[0]) {
             const embed = new Discord.MessageEmbed()
@@ -28,7 +29,7 @@ module.exports = {
             .setTitle(command.name.charAt(0).toUpperCase() + command.name.slice(1))
             .setDescription(command.description)
             .addFields(
-                { name: 'Usage', value: `${prefix}${command.name}` },
+                { name: 'Usage', value: command.usage.replace(/<prefix>/g, prefix) },
                 { name: 'Uses the database', value:` ${command.usesDB}` },
                 );
 

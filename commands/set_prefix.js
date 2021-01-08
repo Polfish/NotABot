@@ -3,7 +3,8 @@ const fsp = require('fs').promises;
 module.exports = {
     name: "setprefix",
     description: "Sets the prefix for the bot.",
-    usesDB: "false",
+    usage: "",
+    usesDB: false,
     async execute(message, args) {
         try {
             if (!args[0]) {

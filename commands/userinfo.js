@@ -4,7 +4,8 @@ const User = require('../schema/user');
 module.exports = {
     name: "userinfo",
     description: "Displays information for a user.",
-    usesDB: "true",
+    usage: "",
+    usesDB: true,
     async execute(message, args, prefix, client) {
         // Try finding the user first before checking the database
         const fetchedUser = !args[0] ? await client.users.fetch(message.author.id) : await client.users.fetch(args[0]);
@@ -21,9 +22,8 @@ module.exports = {
 
         // Getting roles of the user
         const roles = guildMember.roles.cache.map(role => role.name);
-        
+
         const type = guildMember.user.bot ? "Bot" : "Human";
-        console.log(type);
 
         // Add user to database if not found
         if (!user) {
@@ -31,7 +31,7 @@ module.exports = {
                 name: fetchedUser.username,
                 type: type,
                 id: fetchedUser.id,
-                registeredAt: Date.now(),
+                registeredAt: guildMember.joinedAt
             })
 
             await newUser.save().catch(err => console.log(err));
@@ -43,11 +43,11 @@ module.exports = {
             .setAuthor(fetchedUser.tag, fetchedUser.displayAvatarURL())
             .setThumbnail(fetchedUser.displayAvatarURL())
             .addFields(
-                { name: 'User', value: `${user.name} [${user.id}]`, inline: false },
-                { name: 'Type', value: `${user.type}`, inline: false },
-                { name: 'Created At', value: fetchedUser.createdAt, inline: false },
-                { name: 'Joined At', value: guildMember.joinedAt, inline: false },
-                { name: 'Roles', value: roles, inline: false },
+                { name: 'User', value: `${user.name} [${user.id}]`},
+                { name: 'Type', value: user.type},
+                { name: 'Created At', value: fetchedUser.createdAt},
+                { name: 'Joined At', value: guildMember.joinedAt},
+                { name: 'Roles', value: roles},
             );
 
         return message.channel.send(embed);
