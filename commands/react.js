@@ -9,6 +9,7 @@ module.exports = {
   usage: "<prefix>react <trigger> <reaction>",
   usesDB: true,
   async execute(message, args) {
+    // TODO: GIVE PROPER ID
     const containsLine = message.content.includes("|");
     if (args[0] && args[1] || containsLine) {
       let trigger = "";

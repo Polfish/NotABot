@@ -57,7 +57,7 @@ client.login(token);
 
 // Loading command files
 client.commands = new Discord.Collection;
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js')); // Should this be async??? Not sure the performance benefit...
 
 logger.info('Loading commands...');
 
@@ -70,6 +70,7 @@ logger.info('Complete!');
 
 // Executing commands
 client.on('message', async (message) => {
+    // TODO: Turn this into an async function!
 
     // If a message does not start with the prefix or the author of the message was the bot, then don't execute any commands and
     // just return
