@@ -31,39 +31,45 @@ client.on('ready', () => {
     });
 
     // Playing with the new slash commands
-    client.api.applications(client.user.id).guilds('370795842191360012').commands.post({
-        data: {
-            name: 'self',
-            description: 'Get yourself!'
-        }
-    })
+    // client.api.applications(client.user.id).guilds('370795842191360012').commands.post({
+    //     data: {
+    //         name: 'self',
+    //         description: 'Get yourself!'
+    //     }
+    // })
 
-    client.ws.on('INTERACTION_CREATE', async interaction => {
-        const command = interaction.data.name;
-        if (command.toLowerCase() === 'self') {
-            client.api.interactions(interaction.id, interaction.token).callback.post({
-                data: {
-                    type: 4,
-                    data: {
-                        content: interaction.member.user.username
-                    }
-                }
-            })
-        }
-    })
+    // client.ws.on('INTERACTION_CREATE', async interaction => {
+    //     const command = interaction.data.name;
+    //     if (command.toLowerCase() === 'self') {
+    //         client.api.interactions(interaction.id, interaction.token).callback.post({
+    //             data: {
+    //                 type: 4,
+    //                 data: {
+    //                     content: interaction.member.user.username
+    //                 }
+    //             }
+    //         })
+    //     }
+    // })
 });
 
 client.login(token);
 
 // Loading command files
 client.commands = new Discord.Collection;
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js')); // Should this be async??? Not sure the performance benefit...
+const folders = fs.readdirSync('./commands'); // Should this be async??? Not sure the performance benefit...
 
 logger.info('Loading commands...');
 
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+for (const folder of folders) {
+    const commandFiles = fs.readdirSync('./commands/' + folder).filter(file => file.endsWith('.js'));
+
+    console.log(folder);
+    for (const file of commandFiles) {
+        console.log(file)
+        const command = require(`./commands/${folder}/${file}`)
     client.commands.set(command.name, command);
+    }
 }
 
 logger.info('Complete!');
@@ -80,6 +86,7 @@ client.on('message', async (message) => {
 
     // Turning the message into an array
     const argsBefore = message.content.slice(prefix.length).trim();
+    
     // The array has to be explicitly created so that the when shift() is called it deletes the command from the array
     // and when called later it will return empty if no arguments were given
     let args = argsBefore.split(/ +/);

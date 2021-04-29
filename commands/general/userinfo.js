@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const User = require('../schema/user');
+const User = require('../../schema/user');
 
 module.exports = {
     name: "userinfo",

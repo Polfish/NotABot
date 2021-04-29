@@ -2,7 +2,7 @@
  * This command should only be used in emergency situations, such as recursive calling
  */
 module.exports = {
-    name: "stop",
+    name: "terminate",
     description: "Terminates the bot!",
     usage: "",
     usesDB: false,

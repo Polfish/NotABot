@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const url = 'https://www.sjsu.edu/classes/schedules/spring-2021.php';
 
 module.exports = {
     name: "getclass",
@@ -8,6 +7,7 @@ module.exports = {
     usage: "<prefix>getclass '<search parameter>'",
     usesDB: false,
     async execute(message, args, prefix) {
+        const url = 'https://www.sjsu.edu/classes/schedules/spring-2021.php';
         const browser = await puppeteer.launch();
 
         const page = await browser.newPage();
@@ -23,6 +23,7 @@ module.exports = {
             await page.type('#classSchedule_filter > label > input[type=search]', args.join(" "));
         }
 
+        // Okay really need to figure how to do it without screenshot
         await page.waitForSelector('#classSchedule');          // wait for the selector to load
         const element = await page.$('#classSchedule');
         await element.screenshot({ path: 'classSchedule.png'});

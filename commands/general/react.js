@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const Reaction = require('../schema/reaction');
+const Reaction = require('../../schema/reaction');
 
 module.exports = {
   name: "react",
