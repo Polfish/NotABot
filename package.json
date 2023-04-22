@@ -6,7 +6,7 @@
     "author": "Polfish",
     "dependencies": {
         "discord.js": "^12.5.1",
-        "mongoose": "^5.11.9",
+        "mongoose": "^5.13.17",
         "puppeteer": "^5.5.0",
         "winston": "^3.3.3"
     }
